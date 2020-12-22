@@ -1,0 +1,17 @@
+.field {
+  box-sizing: border-box;
+  background-color: rgba(244, 67, 54, 0.8);
+  border: 1px solid #424242;
+  cursor: pointer;
+  font-size: 10vw;
+  color: rgba(255, 255, 255, 0.6);
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.8);
+  }
+  &:focus {
+    outline: none;
+  }
+  &--inactive {
+    pointer-events: none;
+  }
+}

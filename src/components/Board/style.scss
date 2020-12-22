@@ -1,0 +1,9 @@
+.board {
+  width: 600px;
+  max-width: 50vw;
+  height: 600px;
+  max-height: 50vw;
+  display: grid;
+  grid-template-columns: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+  grid-template-rows: calc(100% / 3) calc(100% / 3) calc(100% / 3);
+}
