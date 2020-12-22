@@ -14,7 +14,7 @@ type ClickHandlerType = (
 const Field: React.FC<Props> = ({ id, value }) => {
   const { dispatch } = useStore();
   const handleClick: ClickHandlerType = () => {
-    dispatch({ type: "UPDATE_FIELD", field: id });
+    dispatch({ type: "UPDATE_FIELD", id });
     dispatch({ type: "CHANGE_PLAYER" });
   };
 

@@ -8,8 +8,8 @@ const Board: React.FC = () => {
 
   return (
     <div className="board">
-      {state.fields.map((f, index) => (
-        <Field key={`field-id-${index}`} id={index} value={f} />
+      {state.fields.map((f) => (
+        <Field key={`field-id-${f.id}`} id={f.id} value={f.value} />
       ))}
     </div>
   );
