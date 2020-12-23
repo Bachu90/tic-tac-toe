@@ -3,7 +3,6 @@ import React, {
   ReactChild,
   ReactChildren,
   useContext,
-  useEffect,
   useReducer,
 } from "react";
 
@@ -17,7 +16,7 @@ interface Player {
   sign: "X" | "O";
 }
 
-interface Field {
+export interface Field {
   id: number;
   value: string | null;
 }
@@ -26,6 +25,7 @@ interface Store {
   players: Array<Player>;
   fields: Array<Field>;
   activePlayer: Player | undefined;
+  winner: Player | undefined;
 }
 
 interface Context {
@@ -40,6 +40,9 @@ type ActionType =
     }
   | {
       type: "CHANGE_PLAYER";
+    }
+  | {
+      type: "SET_WINNER";
     };
 
 const tempPlayers: Array<Player> = [
@@ -59,6 +62,7 @@ const initialState: Store = {
   players: tempPlayers,
   fields: new Array(9).fill(null).map((f, i) => ({ id: i, value: f })),
   activePlayer: undefined,
+  winner: undefined,
 };
 
 const reducer = (state: Store, action: ActionType): Store => {
@@ -79,6 +83,11 @@ const reducer = (state: Store, action: ActionType): Store => {
           !!state.activePlayer ? p.id !== state.activePlayer.id : true
         ),
       };
+    case "SET_WINNER":
+      return {
+        ...state,
+        winner: state.activePlayer,
+      };
     default:
       return state;
   }
@@ -89,9 +98,7 @@ export let StoreContext: React.Context<Context>;
 const StoreProvider: React.FC<Props> = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   StoreContext = createContext({ state, dispatch });
-  useEffect(() => {
-    console.info("Store: ", state);
-  }, [state]);
+
   return (
     <StoreContext.Provider value={{ state, dispatch }}>
       {children}

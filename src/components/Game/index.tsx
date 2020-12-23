@@ -1,5 +1,5 @@
 import React from "react";
-import { useDidMount } from "rooks";
+import { useDidMount, useDidUpdate } from "rooks";
 import { useStore } from "../../store";
 import Board from "../Board";
 import "./style.scss";
@@ -12,10 +12,15 @@ const Game: React.FC = () => {
     dispatch({ type: "CHANGE_PLAYER" });
   });
 
+  useDidUpdate(() => {
+    console.info("Store: ", state);
+  }, [state]);
+
   return (
     <div className="game">
       <Board />
       {/* <div>history</div> */}
+      {state.winner && <p>Wygrywa {state.activePlayer?.name}!!!</p>}
     </div>
   );
 };
